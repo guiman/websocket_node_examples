@@ -32,14 +32,9 @@ head
           .well.sidebar-nav.general_dimensions
             ul#user_list.nav.nav-list
               li.nav-header Online users
-              li.active
-                a(href='#') Le Me
+              block logged_in_users
         #chat.span9.general_dimensions
-          p
-            strong Le Me
-            | This is how a message will look like
-            span.pull-right An hour ago
-            
+          block messages
       #controls.row-fluid
         form.form-inline(action='/say', method='post')
           input.btn.span2(type='submit', value='Say it!')

@@ -1,6 +1,7 @@
 var express = require("express")
 var app = express()
-/* 
+
+/*
  * Although generally we start server with createServer()
  * due to deprecation, express now requests to create them
  * using this expression "express()"
@@ -15,21 +16,19 @@ var users = []
 var messages = []
 
 app.get("/", function(req, res){
-  var user_index = getUserIndex(req.remoteAddress + req.remotePort)
-  
+  var user_index = getUserIndex(req.connection.remoteAddress)
+
   res.render('index', {
-    locals: {
-      "username" : users[user_index]
-    }
+    "username" : users[user_index],
+    "users" : users,
+    "messages" : messages
   })
 })
 
 app.post("/say", express.bodyParser(), function(req, res){
-  console.log(req.body)
   if (req.body && req.body.message) {
-    var user_index = getUserIndex(req.remoteAddress + req.remotePort)
+    var user_index = req.connection.remoteAddress
     
-    users[user_index].messages.push(req.body.message)
     messages.push({ body: req.body.message, user: user_index })
     
     if (acceptsHtml(req.headers['accept'])){
@@ -55,10 +54,10 @@ function acceptsHtml(header) {
   return false
 }
 
-function getUserIndex(username){  
+function getUserIndex(username){
   if (users.indexOf(username) == -1) {
-    users.push({ name: username, messages: [] })
+    users[username] = { name: username }
   }
   
-  return users.indexOf(username)
+  return username
 }

@@ -1,1 +1,15 @@
 extend layout
+
+block messages
+  - messages.forEach(function(item){
+      p
+        strong= item.user
+        = item.body
+        span.pull-right An hour ago
+    - })
+    
+block logged_in_users
+  - users.forEach(function(item){
+      li
+        = item
+  - })  
