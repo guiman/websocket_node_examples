@@ -9,6 +9,7 @@ connection.onerror = function (error) {
 connection.onmessage = function (e) {
   var message = JSON.parse(e.data);
   $("#chat").append("<p><strong>"+message.user+" </strong>"+message.body.message+"<span class='pull-right'>"+ new Date() +"</span></p>");
+  $("#chat").animate({ scrollTop: $(document).height() }, "slow");
 };
 
 
