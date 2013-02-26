@@ -10,6 +10,16 @@ What to expect
 Here you will find three node.js applications with it's clients for the browser. The description should lead you to think
 tha this applications will only work on WebSocket ready clients.
 
+Before we start
+===============
+
+Run this command on the mail project directory. It will take care of installing all depedencies.
+
+```bash
+npm install
+```
+
+
 Running the examples
 ====================
 
@@ -25,8 +35,6 @@ the same data back to the client.
 
 ###For the most basic example
 
-You need to have node.js installed, then run:
-
 ```bash
 cd simple_example
 node websockets_server.js
@@ -36,13 +44,7 @@ Then using the the browser of choice open the index.html file and you will start
 
 ###To run the chat application
 
-You need to have node.js installed, express and websocket. To install them on the same directory as this files run:
-
-```bash
-npm install express websocket jade
-```
-
-Then just run the chat version you want like:
+Just run the chat version you want like:
 
 ```bash
 node app_with_webskckets.js
@@ -62,4 +64,3 @@ NOTE: Check the public/javasripts/websocket_app_cli.js and change the server URL
 the common callbacks.
 
 *public/javascripts/websocket_app_cli.js: This is the cliet side of the chat example for Websockets.
-
