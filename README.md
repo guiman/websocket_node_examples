@@ -54,6 +54,7 @@ node app.js
 
 Then using the the browser of choice open http://localhost:3000.
 
+NOTE: Check the public/javasripts/websocket_app_cli.js and change the server URL in order to be accesible to others (like people in your LAN).
 
 ##Client applications
 
