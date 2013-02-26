@@ -1,4 +1,4 @@
-var connection = new WebSocket('ws://192.168.0.9:3000', 'echo-protocol');
+var connection = new WebSocket('ws://localhost:3000', 'echo-protocol');
 
 // Log errors
 connection.onerror = function (error) {
