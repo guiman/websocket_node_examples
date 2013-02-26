@@ -3,9 +3,10 @@ extend layout
 block messages
   - messages.forEach(function(item){
       p
-        strong= item.user
-        = item.body
-        span.pull-right An hour ago
+        strong= item.user 
+        = item.body.message
+        span.pull-right
+          = item.time
     - })
     
 block logged_in_users

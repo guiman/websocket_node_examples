@@ -53,7 +53,7 @@ wsServer.on('request', function(request) {
   connection.on('message', function(message) {
       if (message.type === 'utf8')
       {
-        var object = { body: JSON.parse(message.utf8Data), user: user_index }
+        var object = { body: JSON.parse(message.utf8Data), user: user_index, time: new Date() }
         messages.push(object)
         
         // Send notifications to all the other connections

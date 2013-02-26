@@ -29,7 +29,7 @@ app.post("/say", express.bodyParser(), function(req, res){
   if (req.body && req.body.message) {
     var user_index = req.connection.remoteAddress
     
-    messages.push({ body: req.body.message, user: user_index })
+    messages.push({ body: req.body.message, user: user_index, time: new Date() })
     
     if (acceptsHtml(req.headers['accept'])){
       res.redirect(302, '/')
