@@ -1,6 +1,7 @@
 var WebSocketServer = require('websocket').server
 var express = require("express")
 var http = require('http')
+var S = require('string')
 var app = express()
 
 /*
@@ -14,8 +15,7 @@ app.set('view engine', 'jade')
 app.use(express.static(__dirname + '/public'))
 app.use(express.logger('dev'))
 
-var users = []
-var messages = []
+users = []
 
 // The HTTP part
 app.get("/", function(req, res){
@@ -24,7 +24,7 @@ app.get("/", function(req, res){
   res.render('index', {
     "username" : users[user_index],
     "users" : users,
-    "messages" : messages
+    "messages" : []
   })
 })
 
@@ -53,9 +53,21 @@ wsServer.on('request', function(request) {
   connection.on('message', function(message) {
       if (message.type === 'utf8')
       {
-        var object = { body: JSON.parse(message.utf8Data), user: user_index, time: new Date() }
-        messages.push(object)
-        
+        body = JSON.parse(message.utf8Data)
+
+        //Only gifs
+        if (body.message.search(/^\!.*\gif$/) != -1)
+        {
+          //let's show some gifs
+          body.message = body.message.replace(/\!(.*)$/, "<a href=\"$1\" target=\"blank\"><img src=\"$1\" /></a>")
+        }
+        else
+        {
+          body.message = S(body.message).escapeHTML().s
+        }
+
+        var object = { body: body, user: user_index, time: new Date() }
+
         // Send notifications to all the other connections
         for (i = 0; i < connections.length; i++)
         {
